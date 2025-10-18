@@ -1,0 +1,34 @@
+name : CI Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_resquests:
+
+jobs:
+  build:
+    runs-on: ubuntu-lastest
+    steps:
+      -name: Checkout
+       uses: action/checkout@v4
+
+      -name: Build Docker Image
+       run: docker build -t ci-demo:${{ github.sha }}
+
+test:
+  runs-on: ubuntu-lastest
+  steps:
+    -name: Checkout
+     uses: action/checkout@v4
+
+    -name: Install & Test
+     run: |
+       npm install
+       npm test
+
+deploy:
+  if: github.ref == 'refs/heads/main'
+  runs-on: ubuntu-lastest
+  steps:
+    -name: Deploy (simulation)
+     run: echo "Deploying to staging..."
