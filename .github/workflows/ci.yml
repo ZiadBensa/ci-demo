@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-lastest
     steps:
       -name: Checkout
-       uses: action/checkout@v4
+       uses: actions/checkout@v4
 
       -name: Build Docker Image
        run: docker build -t ci-demo:${{ github.sha }}
@@ -19,7 +19,7 @@ test:
   runs-on: ubuntu-lastest
   steps:
     -name: Checkout
-     uses: action/checkout@v4
+     uses: actions/checkout@v4
 
     -name: Install & Test
      run: |
